@@ -884,3 +884,9 @@ body.dark-mode #darkModeBtn {
 .label-name { font-size: 11px; font-weight: 900; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .label-code { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-top: 3px; font-family: monospace; }
 .label-price { font-size: 13px; font-weight: 900; color: #17364c; margin-top: 2px; border-top: 1px solid #ddd; padding-top: 3px; }
+.page:not(.active) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}

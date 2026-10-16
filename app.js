@@ -256,16 +256,27 @@ function switchPartnersTab(tabName) {
 }
 
 function switchFinanceTab(tabName) {
-  document.querySelectorAll('.fin-tab-content').forEach(function(el) { el.style.display = 'none'; });
+  document.querySelectorAll('.fin-tab-content').forEach(function(el) { 
+    el.style.display = 'none'; 
+  });
+  
   if (tabName === 'expenses') {
-    document.getElementById('finTabExpenses').style.display = 'block';
+    const el = document.getElementById('finTabExpenses');
+    if (el) el.style.display = 'block';
   }
   if (tabName === 'reports') {
-    document.getElementById('finTabReports').style.display = 'block';
+    const el = document.getElementById('finTabReports');
+    if (el) el.style.display = 'block';
     renderReports();
   }
+  if (tabName === 'compare') {
+    const el = document.getElementById('finTabCompare');
+    if (el) el.style.display = 'block';
+    if (typeof onCompareTypeChange === 'function') onCompareTypeChange();
+  }
   if (tabName === 'shift') {
-    document.getElementById('finTabShift').style.display = 'block';
+    const el = document.getElementById('finTabShift');
+    if (el) el.style.display = 'block';
     calcExpectedShiftCash();
     renderShifts();
   }

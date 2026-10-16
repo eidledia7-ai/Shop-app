@@ -192,7 +192,11 @@ document.querySelectorAll('.inv-tab-content, .part-tab-content, .fin-tab-content
   document.querySelectorAll('.sidebar-nav button').forEach(function(b) { b.classList.remove('active'); });
 
   const targetPage = document.getElementById(pageId);
-  if (targetPage) targetPage.classList.add('active');
+  if (targetPage) {
+  targetPage.classList.add('active');
+  targetPage.style.display = 'block';
+}
+
   const targetBtn = document.querySelector('.sidebar-nav button[data-page="' + pageId + '"]');
   if (targetBtn) targetBtn.classList.add('active');
 
@@ -694,7 +698,9 @@ function loadStoreSettings() {
   const preview = document.getElementById('storeLogoPreview');
   if (preview && s.logo) { preview.src = s.logo; preview.style.display = 'block'; }
   else if (preview) { preview.style.display = 'none'; }
-}
+     const dz = document.getElementById('dangerZone');
+if (dz) dz.style.display = 'block';
+      }
 
 function saveStoreSettings() {
   if (state.role !== 'manager') return showNotification('هذه العملية للمدير فقط', 'warning');

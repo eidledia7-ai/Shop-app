@@ -182,7 +182,13 @@ function showPage(pageId) {
     pageId = 'sales';
   }
 
-  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.page').forEach(function(p) {
+  p.classList.remove('active');
+  p.style.display = 'none';
+});
+document.querySelectorAll('.inv-tab-content, .part-tab-content, .fin-tab-content').forEach(function(el) {
+  el.style.display = 'none';
+});
   document.querySelectorAll('.sidebar-nav button').forEach(function(b) { b.classList.remove('active'); });
 
   const targetPage = document.getElementById(pageId);

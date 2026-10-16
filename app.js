@@ -190,8 +190,7 @@ document.querySelectorAll('.inv-tab-content, .part-tab-content, .fin-tab-content
   el.style.display = 'none';
 });
   document.querySelectorAll('.sidebar-nav button').forEach(function(b) { b.classList.remove('active'); });
-document.getElementById('settingsHub').style.display = 'none';
-document.getElementById('aboutUs').style.display = 'none';
+
   const targetPage = document.getElementById(pageId);
   if (targetPage) {
   targetPage.classList.add('active');

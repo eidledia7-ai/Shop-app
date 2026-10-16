@@ -880,3 +880,66 @@ body.dark-mode #darkModeBtn {
 .label-name { font-size: 11px; font-weight: 900; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .label-code { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-top: 3px; font-family: monospace; }
 .label-price { font-size: 13px; font-weight: 900; color: #17364c; margin-top: 2px; border-top: 1px solid #ddd; padding-top: 3px; }
+/* ============ الوضع النهاري الإجباري ============ */
+body.light-mode {
+  background: #e8edf3 !important;
+  color: #203447 !important;
+}
+
+body.light-mode .card,
+body.light-mode .panel {
+  background: #f5f8fa !important;
+  border-color: #dce5ec !important;
+  color: #203447 !important;
+}
+
+body.light-mode .card h3,
+body.light-mode .panel h3 {
+  color: #173d52 !important;
+  border-bottom-color: #dce5ec !important;
+}
+
+body.light-mode .stat-card {
+  background: linear-gradient(135deg, #d0e2ed, #bcd5e4) !important;
+  border-color: #8fb2c8 !important;
+  color: #203447 !important;
+}
+
+body.light-mode .stat-card h3 { color: #344e62 !important; }
+body.light-mode .stat-card p { color: #17364c !important; }
+
+body.light-mode input,
+body.light-mode select,
+body.light-mode textarea {
+  background: #ffffff !important;
+  color: #172b3a !important;
+  border-color: #aebfcd !important;
+}
+
+body.light-mode label { color: #3d5669 !important; }
+
+body.light-mode table,
+body.light-mode .data-table,
+body.light-mode .table-wrap {
+  background: #ffffff !important;
+  color: #203447 !important;
+  border-color: #dce5ec !important;
+}
+
+body.light-mode th {
+  background: #edf3f9 !important;
+  color: #234356 !important;
+}
+
+body.light-mode td {
+  border-bottom-color: #dce5ec !important;
+  color: #203447 !important;
+}
+
+body.light-mode .app-header {
+  background: linear-gradient(125deg, #142f46 0%, #176b70 100%) !important;
+}
+
+body.light-mode .sidebar {
+  background: linear-gradient(180deg, #10283d 0%, #153e50 100%) !important;
+}

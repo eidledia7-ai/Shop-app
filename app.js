@@ -192,11 +192,7 @@ document.querySelectorAll('.inv-tab-content, .part-tab-content, .fin-tab-content
   document.querySelectorAll('.sidebar-nav button').forEach(function(b) { b.classList.remove('active'); });
 
   const targetPage = document.getElementById(pageId);
-  if (targetPage) {
-  targetPage.classList.add('active');
-  targetPage.style.display = 'block';
-}
-
+  if (targetPage) targetPage.classList.add('active');
   const targetBtn = document.querySelector('.sidebar-nav button[data-page="' + pageId + '"]');
   if (targetBtn) targetBtn.classList.add('active');
 

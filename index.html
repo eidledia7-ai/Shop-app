@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>إدارة المحل - نظام متكامل</title>
- <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#176b70"> 
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#176b70">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -757,8 +757,14 @@
         </div>
         <div id="storeProfileMessage" class="muted mt-10"></div>
       </div>
-
       <div class="card mt-20">
+  <h3>🔄 تحديثات التطبيق</h3>
+  <p class="muted">تحديث التطبيق تلقائي. لو لاحظت مشاكل، اضغط "تحديث الآن".</p>
+  <div class="btn-group mt-15">
+    <button class="btn green" onclick="checkForUpdates()">🔄 تحديث الآن</button>
+    <button class="btn orange" onclick="clearAppCache()">🗑️ مسح الكاش</button>
+  </div>
+</div>
         <h3>🔒 النسخ الاحتياطي والتشفير</h3>
         <div class="form-grid mt-15">
           <div class="form-group span-2">
@@ -924,6 +930,42 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+ <script src="app.js"></script>
+<script>
+  // تسجيل Service Worker للتحديث التلقائي
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(function(reg) {
+        console.log('✅ Service Worker registered:', reg.scope);
+        
+        // فحص التحديثات كل 5 دقائق
+        setInterval(function() {
+          reg.update();
+        }, 5 * 60 * 1000);
+        
+        // لو فيه تحديث جديد → طبّقه
+        reg.addEventListener('updatefound', function() {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', function() {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // فيه تحديث جديد
+              if (confirm('🔔 فيه تحديث جديد للتطبيق! تريد تحديثه الآن؟')) {
+                newWorker.postMessage({ type: 'SKIP_WAITING' });
+                window.location.reload();
+              }
+            }
+          });
+        });
+      })
+      .catch(function(err) {
+        console.warn('Service Worker registration failed:', err);
+      });
+    
+    // لما Service Worker جديد يتفعّل → أعد تحميل الصفحة
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      window.location.reload();
+    });
+  }
+</script>
 </body>
 </html>

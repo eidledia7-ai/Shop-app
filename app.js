@@ -4398,3 +4398,47 @@ async function printBarcodeLabels() {
 
   showNotification('تم توليد ' + labels.length + ' ملصق ✅');
 }
+/* ==========================================================
+   الجزء 9: تحديث التطبيق
+   ========================================================== */
+
+function checkForUpdates() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(function(reg) {
+      if (reg) {
+        reg.update().then(function() {
+          showNotification('✅ التطبيق محدّث');
+        });
+      } else {
+        showNotification('⚠️ Service Worker غير مسجّل', 'warning');
+      }
+    });
+  } else {
+    showNotification('⚠️ المتصفح لا يدعم التحديث التلقائي', 'warning');
+  }
+}
+
+function clearAppCache() {
+  if (!confirm('سيتم مسح الكاش وإعادة تحميل التطبيق. متابعة؟')) return;
+  
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: 'CLEAR_CACHE' });
+  }
+  
+  if ('caches' in window) {
+    caches.keys().then(function(names) {
+      return Promise.all(names.map(function(name) {
+        return caches.delete(name);
+      }));
+    }).then(function() {
+      showNotification('✅ تم مسح الكاش. جارٍ إعادة التحميل...');
+      setTimeout(function() {
+        window.location.reload(true);
+      }, 1000);
+    });
+  } else {
+    window.location.reload(true);
+  }
+}
+
+/* ============ نهاية الجزء 9 ============ */

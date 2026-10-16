@@ -4176,18 +4176,31 @@ switchFinanceTab = function(tabName) {
    ========================================================== */
 
 function toggleDarkMode() {
-  const isDark = document.body.classList.toggle('dark-mode');
-  localStorage.setItem('pos_darkMode', isDark ? '1' : '0');
+  const isCurrentlyDark = document.body.classList.contains('dark-mode');
+  if (isCurrentlyDark) {
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+    localStorage.setItem('pos_darkMode', '0');
+    showNotification('☀️ الوضع النهاري مُفعّل', 'info');
+  } else {
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+    localStorage.setItem('pos_darkMode', '1');
+    showNotification('🌙 الوضع الليلي مُفعّل', 'info');
+  }
   updateDarkModeBtn();
-  showNotification(isDark ? '🌙 الوضع الليلي مُفعّل' : '☀️ الوضع النهاري مُفعّل', 'info');
 }
 
-function updateDarkModeBtn() {
-  const btn = document.getElementById('darkModeBtn');
-  if (!btn) return;
-  const isDark = document.body.classList.contains('dark-mode');
-  btn.textContent = isDark ? '☀️' : '🌙';
-  btn.title = isDark ? 'الوضع النهاري' : 'الوضع الليلي';
+function applySavedDarkMode() {
+  const saved = localStorage.getItem('pos_darkMode') === '1';
+  if (saved) {
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+  }
+  updateDarkModeBtn();
 }
 
 function applySavedDarkMode() {
